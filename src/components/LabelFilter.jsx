@@ -2,14 +2,14 @@ import { LABELS } from '../data/labels'
 
 function LabelFilter({ selectedLabel, onSelectLabel }) {
   return (
-    <div className="flex flex-wrap gap-2 mb-6">
+    <div className="flex flex-row lg:flex-col gap-2">
       {LABELS.map((label) => {
         const isSelected = selectedLabel === label.name
         return (
           <button
             key={label.id}
             onClick={() => onSelectLabel(label.name)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
               isSelected
                 ? 'ring-2 ring-offset-2 ring-blue-500'
                 : 'hover:opacity-80'

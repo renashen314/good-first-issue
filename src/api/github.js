@@ -10,9 +10,13 @@ const client = new GraphQLClient(GITHUB_API_URL, {
 })
 
 const ISSUES_QUERY = gql`
-  query GetIssues($query: String!, $first: Int!) {
-    search(query: $query, type: ISSUE, first: $first) {
+  query GetIssues($query: String!, $first: Int!, $after: String) {
+    search(query: $query, type: ISSUE, first: $first, after: $after) {
       issueCount
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
       nodes {
         ... on Issue {
           id
@@ -42,16 +46,17 @@ const ISSUES_QUERY = gql`
   }
 `
 
-export async function fetchIssuesByLabel(label) {
-  // Build repo filter from curated list
-  const repoFilter = REPOSITORIES.map((r) => `repo:${r.name}`).join(' ')
+const PAGE_SIZE = 10
 
+export async function fetchIssuesByLabel(label, cursor = null) {
+  const repoFilter = REPOSITORIES.map((r) => `repo:${r.name}`).join(' ')
   const labelFilter = label === 'All' ? '' : `label:"${label}"`
   const query = `${repoFilter} is:issue is:open ${labelFilter} sort:updated-desc`
 
   const data = await client.request(ISSUES_QUERY, {
     query,
-    first: 30,
+    first: PAGE_SIZE,
+    after: cursor,
   })
 
   return data.search

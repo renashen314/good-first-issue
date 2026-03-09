@@ -1,6 +1,17 @@
 import IssueCard from './IssueCard'
+import Pagination from './Pagination'
 
-function IssueList({ data, isLoading, error }) {
+function IssueList({
+  data,
+  isLoading,
+  error,
+  page,
+  hasNextPage,
+  hasPrevPage,
+  onNextPage,
+  onPrevPage,
+  isFetching,
+}) {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-12">
@@ -28,9 +39,19 @@ function IssueList({ data, isLoading, error }) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-gray-600">
-        Found {data.issueCount} issues
-      </p>
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-gray-600">
+          Found {data.issueCount} issues
+        </p>
+        <Pagination
+          page={page}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
+          onNextPage={onNextPage}
+          onPrevPage={onPrevPage}
+          isLoading={isFetching}
+        />
+      </div>
       <div className="grid gap-4">
         {data.nodes.map((issue) => (
           <IssueCard key={issue.id} issue={issue} />
