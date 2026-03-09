@@ -9,16 +9,11 @@ function LabelFilter({ selectedLabel, onSelectLabel }) {
           <button
             key={label.id}
             onClick={() => onSelectLabel(label.name)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap border-2 cursor-pointer ${
               isSelected
-                ? 'ring-2 ring-offset-2 ring-blue-500'
-                : 'hover:opacity-80'
+                ? 'bg-purple-500 text-white border-purple-500 ring-2 ring-offset-2 ring-purple-500'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-purple-300 hover:text-purple-400'
             }`}
-            style={{
-              backgroundColor: `#${label.color}25`,
-              color: `#${label.color}`,
-              border: `2px solid #${label.color}`,
-            }}
           >
             {label.name}
           </button>

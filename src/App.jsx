@@ -25,7 +25,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Fixed left sidebar */}
-      <aside className="hidden lg:block fixed top-0 left-0 w-72 h-screen bg-white border-r border-gray-200 p-6 overflow-y-auto">
+      <aside className="hidden lg:block fixed top-0 left-16 w-72 h-screen p-6 overflow-y-auto">
         <div className="space-y-6">
           <header>
             <h1 className="text-2xl font-bold text-gray-800">
@@ -39,7 +39,7 @@ function AppContent() {
           <button
             onClick={() => refetch()}
             disabled={isFetching}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            className="w-full px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 cursor-pointer"
           >
             {isFetching ? (
               <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
@@ -67,7 +67,7 @@ function AppContent() {
           </button>
 
           <div>
-            <h2 className="text-sm font-semibold text-gray-700 mb-3">
+            <h2 className="text-sm font-semibold text-gray-700 mb-3 py-2">
               Filter by Label
             </h2>
             <LabelFilter
@@ -79,9 +79,9 @@ function AppContent() {
       </aside>
 
       {/* Mobile header */}
-      <div className="lg:hidden p-4 bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="lg:hidden p-4 bg-gray-100 border-b border-gray-200 shadow-md sticky top-0 z-10">
         <h1 className="text-xl font-bold text-gray-800">GitHub Issue Finder</h1>
-        <div className="flex gap-2 mt-3 overflow-x-auto pb-2">
+        <div className="flex gap-2 overflow-x-auto px-2 py-4">
           <LabelFilter
             selectedLabel={selectedLabel}
             onSelectLabel={setSelectedLabel}
@@ -90,7 +90,7 @@ function AppContent() {
       </div>
 
       {/* Right scrollable content */}
-      <main className="lg:ml-72 p-4 lg:p-8">
+      <main className="lg:ml-72 lg:py-8 lg:px-24">
         <IssueList
           data={data}
           isLoading={isLoading}
