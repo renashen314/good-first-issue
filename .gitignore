@@ -26,3 +26,10 @@ dist-ssr
 .env
 CHANGELOG.md
 REQUIREMENTS.md
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
